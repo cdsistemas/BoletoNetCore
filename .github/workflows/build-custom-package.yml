@@ -28,6 +28,6 @@ jobs:
         run: dotnet pack --configuration Release --no-build --output ./nupkg
 
       - name: Push do pacote NuGet para o GitHub Packages
-        run: dotnet nuget push ./nupkg/*.nupkg --source "github" --api-key ${{ secrets.NUGET_TOKEN }}
+        run: dotnet nuget push ./nupkg/*.nupkg --source "github" --api-key ${{ secrets.NUGET_TOKEN }} --skip-duplicate
         env:
           NUGET_USERNAME: ${{ secrets.NUGET_USERNAME }}
