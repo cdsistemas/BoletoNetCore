@@ -10,24 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout git
         uses: actions/checkout@v3
 
-      - name: Setup .NET
+      - name: Configurando .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8'  
 
-      - name: Restore dependencies
+      - name: Instalando dependências
         run: dotnet restore
 
-      - name: Build the project
+      - name: Compilando projeto
         run: dotnet build --configuration Release --no-restore
 
-      - name: Pack the NuGet package
+      - name: Gerando pacote do Nuget
         run: dotnet pack --configuration Release --no-build --output ./nupkg
 
-      - name: Push NuGet package to GitHub Packages
+      - name: Push do pacote NuGet para o GitHub Packages
         run: dotnet nuget push ./nupkg/*.nupkg --source "github" --api-key ${{ secrets.NUGET_TOKEN }}
         env:
           NUGET_USERNAME: ${{ secrets.NUGET_USERNAME }}
